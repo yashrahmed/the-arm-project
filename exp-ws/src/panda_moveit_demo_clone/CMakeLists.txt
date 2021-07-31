@@ -59,10 +59,10 @@ install(
 #   DESTINATION lib/${PROJECT_NAME}
 # )
 
-# install(
-#   DIRECTORY resources/config resources/gazebo resources/hardware resources/rviz resources/system  resources/urdf launch
-#   DESTINATION share/${PROJECT_NAME}
-# )
+install(
+  DIRECTORY resources launch
+  DESTINATION share/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

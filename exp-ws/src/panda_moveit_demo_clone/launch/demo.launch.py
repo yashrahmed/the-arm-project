@@ -42,22 +42,22 @@ def generate_launch_description():
     # planning_context
     robot_description_config = xacro.process_file(
         os.path.join(
-            get_package_share_directory("moveit_resources_panda_moveit_config"),
-            "config",
+            get_package_share_directory("panda_moveit_demo_clone"),
+            "resources",
             "panda.urdf.xacro",
         )
     )
     robot_description = {"robot_description": robot_description_config.toxml()}
 
     robot_description_semantic_config = load_file(
-        "moveit_resources_panda_moveit_config", "config/panda.srdf"
+        "panda_moveit_demo_clone", "resources/panda.srdf"
     )
     robot_description_semantic = {
         "robot_description_semantic": robot_description_semantic_config
     }
 
     kinematics_yaml = load_yaml(
-        "moveit_resources_panda_moveit_config", "config/kinematics.yaml"
+        "panda_moveit_demo_clone", "resources/kinematics.yaml"
     )
     robot_description_kinematics = {"robot_description_kinematics": kinematics_yaml}
 
@@ -70,13 +70,13 @@ def generate_launch_description():
         }
     }
     ompl_planning_yaml = load_yaml(
-        "moveit_resources_panda_moveit_config", "config/ompl_planning.yaml"
+        "panda_moveit_demo_clone", "resources/ompl_planning.yaml"
     )
     ompl_planning_pipeline_config["move_group"].update(ompl_planning_yaml)
 
     # Trajectory Execution Functionality
     moveit_simple_controllers_yaml = load_yaml(
-        "moveit_resources_panda_moveit_config", "config/panda_controllers.yaml"
+        "panda_moveit_demo_clone", "resources/panda_controllers.yaml"
     )
     moveit_controllers = {
         "moveit_simple_controller_manager": moveit_simple_controllers_yaml,
@@ -115,7 +115,7 @@ def generate_launch_description():
 
     # RViz
     tutorial_mode = LaunchConfiguration("rviz_tutorial")
-    rviz_base = os.path.join(get_package_share_directory("moveit2_tutorials"), "launch")
+    rviz_base = os.path.join(get_package_share_directory("panda_moveit_demo_clone"), "resources")
     rviz_full_config = os.path.join(rviz_base, "panda_moveit_config_demo.rviz")
     rviz_empty_config = os.path.join(rviz_base, "panda_moveit_config_demo_empty.rviz")
     rviz_node_tutorial = Node(
@@ -167,8 +167,8 @@ def generate_launch_description():
 
     # ros2_control using FakeSystem as hardware
     ros2_controllers_path = os.path.join(
-        get_package_share_directory("moveit_resources_panda_moveit_config"),
-        "config",
+        get_package_share_directory("panda_moveit_demo_clone"),
+        "resources",
         "panda_ros_controllers.yaml",
     )
     ros2_control_node = Node(
@@ -196,18 +196,6 @@ def generate_launch_description():
             )
         ]
 
-    # Warehouse mongodb server
-    mongodb_server_node = Node(
-        package="warehouse_ros_mongo",
-        executable="mongo_wrapper_ros.py",
-        parameters=[
-            {"warehouse_port": 33829},
-            {"warehouse_host": "localhost"},
-            {"warehouse_plugin": "warehouse_ros_mongo::MongoDatabaseConnection"},
-        ],
-        output="screen",
-    )
-
     return LaunchDescription(
         [
             tutorial_arg,
@@ -216,8 +204,7 @@ def generate_launch_description():
             static_tf,
             robot_state_publisher,
             run_move_group_node,
-            ros2_control_node,
-            mongodb_server_node,
+            ros2_control_node
         ]
         + load_controllers
     )
