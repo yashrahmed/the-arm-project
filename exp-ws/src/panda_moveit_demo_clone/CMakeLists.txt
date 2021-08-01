@@ -26,7 +26,7 @@ ament_python_install_package(${PROJECT_NAME})
 add_library(
   ${PROJECT_NAME}
   SHARED
-  src/test.cpp
+  src/mock_panda_hw_system.cpp
 )
 target_include_directories(
   ${PROJECT_NAME}
@@ -40,7 +40,7 @@ ament_target_dependencies(
   rclcpp
 )
 
-#pluginlib_export_plugin_description_file(hardware_interface resources/hardware/ros2_control_demo_hardware.xml)
+pluginlib_export_plugin_description_file(hardware_interface resources/mock_hardware.xml)
 
 
 # INSTALL

@@ -6,7 +6,8 @@
 
         <ros2_control name="${name}" type="system">
             <hardware>
-                <plugin>fake_components/GenericSystem</plugin>
+                <!-- <plugin>fake_components/GenericSystem</plugin> -->
+                <plugin>mock_panda_hw_system/MockArmHardware</plugin>
             </hardware>
             <joint name="panda_joint1">
                 <param name="initial_position">${initial_positions['panda_joint1']}</param>
