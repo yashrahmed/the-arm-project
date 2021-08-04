@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<robot name="single-joint"
+    xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <material name="cyan">
+        <color rgba="0 0.5 .8 1"/>
+    </material>
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+
+    <link name="base_link">
+    </link>
+    <link name="robot_link0">
+        <visual>
+            <geometry>
+                <!-- Set scale to 0.001 as tinker cad STL exports are in mm units -->
+                <mesh scale="0.001 0.001 0.001" filename="package://single_joint_demo/resources/single-joint-robot/base-visual.stl" />
+            </geometry>
+            <material name="cyan"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh scale="0.001 0.001 0.001" filename="package://single_joint_demo/resources/single-joint-robot/base-collision.stl" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="base_join" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <parent link="base_link" />
+        <child link="robot_link0" />
+    </joint>
+    <link name="robot_link1">
+        <visual>
+            <geometry>
+                <!-- Set scale to 0.001 as tinker cad STL exports are in mm units -->
+                <mesh scale="0.001 0.001 0.001" filename="package://single_joint_demo/resources/single-joint-robot/arm-visual.stl" />
+            </geometry>
+            <material name="white"/>
+            <origin rpy="0 0 0" xyz="-0.031125 -0.005125 0" />
+        </visual>
+        <collision>
+            <geometry>
+                <mesh scale="0.001 0.001 0.001" filename="package://single_joint_demo/resources/single-joint-robot/arm-collision.stl" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="joint1" type="revolute">
+        <safety_controller k_position="0.0" k_velocity="40.0" soft_lower_limit="0" soft_upper_limit="2.95" />
+        <origin rpy="0 0 0" xyz="0.031125 0.005125 0" />
+        <parent link="robot_link0" />
+        <child link="robot_link1" />
+        <axis xyz="0 0 1" />
+        <limit effort="87" lower="0" upper="2.95" velocity="2.3925" />
+    </joint>
+
+</robot>
