@@ -54,10 +54,10 @@ install(
   DESTINATION include
 )
 
-# install(
-#   PROGRAMS scripts/arduino-motor-driver.py 
-#   DESTINATION lib/${PROJECT_NAME}
-# )
+install(
+  PROGRAMS scripts/servo-driver.py 
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 install(
   DIRECTORY resources launch
