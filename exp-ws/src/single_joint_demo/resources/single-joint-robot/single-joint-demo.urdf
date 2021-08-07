@@ -51,7 +51,7 @@
         <origin rpy="0 0 0" xyz="0.031125 0.005125 0" />
         <parent link="robot_link0" />
         <child link="robot_link1" />
-        <axis xyz="0 0 1" />
+        <axis xyz="0 0 -1" />
         <limit effort="87" lower="0" upper="2.95" velocity="2.3925" />
     </joint>
 

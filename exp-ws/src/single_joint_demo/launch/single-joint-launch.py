@@ -111,7 +111,7 @@ def generate_launch_description():
     )
 
     # RViz
-    rviz_base = os.path.join(get_package_share_directory("single_joint_demo"), "single-joint-robot", "resources")
+    rviz_base = os.path.join(get_package_share_directory("single_joint_demo"), "resources", "rviz")
     rviz_empty_config = os.path.join(rviz_base, "demo_empty.rviz")
     rviz_node_tutorial = Node(
         package="rviz2",
