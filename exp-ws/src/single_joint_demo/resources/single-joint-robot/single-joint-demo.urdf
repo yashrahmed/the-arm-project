@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<robot name="single-joint"
+<robot name="single-joint-demo-robot"
     xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <material name="cyan">
@@ -10,8 +10,8 @@
     </material>
 
 
-    <link name="base_link">
-    </link>
+    <!-- <link name="base_link">
+    </link> -->
     <link name="robot_link0">
         <visual>
             <geometry>
@@ -26,11 +26,11 @@
             </geometry>
         </collision>
     </link>
-    <joint name="base_join" type="fixed">
+    <!-- <joint name="base_join" type="fixed">
         <origin rpy="0 0 0" xyz="0 0 0" />
         <parent link="base_link" />
         <child link="robot_link0" />
-    </joint>
+    </joint> -->
     <link name="robot_link1">
         <visual>
             <geometry>
@@ -47,7 +47,7 @@
         </collision>
     </link>
     <joint name="joint1" type="revolute">
-        <safety_controller k_position="0" k_velocity="40.0" soft_lower_limit="0" soft_upper_limit="-2.79" />
+        <safety_controller k_position="0" k_velocity="40.0" soft_lower_limit="0" soft_upper_limit="2.79" />
         <origin rpy="0 0 0" xyz="0.031125 0.005125 0" />
         <parent link="robot_link0" />
         <child link="robot_link1" />
