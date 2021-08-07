@@ -1,9 +1,0 @@
-<library path="panda_moveit_demo_clone">
-  <class name="mock_panda_hw_system/JointHardware"
-         type="mock_panda_hw_system::JointHardware"
-         base_class_type="hardware_interface::SystemInterface">
-    <description>
-      Mock hardware to write joint states on a topic.
-    </description>
-  </class>
-</library>
