@@ -2,9 +2,31 @@
 #include "hardware_interface/system_interface.hpp"
 #include "single_joint_demo/single_joint_demo_hw.hpp"
 #include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
+
 
 namespace single_joint_demo_hw
 {
+
+    JointPositionPublisherUtil::JointPositionPublisherUtil() : Node("minimal_publisher")
+    {
+        RCLCPP_INFO(rclcpp::get_logger("JointPositionPublisherUtil"), "creating util.....");
+        this->publisher = this->create_publisher<std_msgs::msg::String>("/driver/joint_cmd", 10);
+    }
+
+    void JointPositionPublisherUtil::publish(std::string joint_positions_str)
+    {
+        auto message = std_msgs::msg::String();
+        message.data = joint_positions_str;
+        this->publisher->publish(message);
+    }
+
+    JointHardware::JointHardware() : joint_position_pub_util()
+    {
+        RCLCPP_INFO(rclcpp::get_logger("JointHardware"), "Constructing.....");
+    }
+
+
     return_type JointHardware::write()
     {
         /*
@@ -28,6 +50,7 @@ namespace single_joint_demo_hw
         }
 
         RCLCPP_INFO(rclcpp::get_logger("JointHardware"), "writing %s", joint_positions_str.c_str());
+        this->joint_position_pub_util.publish(joint_positions_str);
         return return_type::OK;
     }
 

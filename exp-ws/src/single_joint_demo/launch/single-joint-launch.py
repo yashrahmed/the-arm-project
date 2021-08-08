@@ -162,6 +162,13 @@ def generate_launch_description():
         },
     )
 
+    # Driver node
+    servo_driver_node = Node(
+        package='single_joint_demo',
+        executable='servo-driver.py',
+        output='screen'
+    )
+
     # Load controllers
     load_controllers = []
     for controller in [
@@ -182,7 +189,8 @@ def generate_launch_description():
             static_tf,
             robot_state_publisher,
             run_move_group_node,
-            ros2_control_node
+            ros2_control_node,
+            servo_driver_node
         ]
         + load_controllers
     )

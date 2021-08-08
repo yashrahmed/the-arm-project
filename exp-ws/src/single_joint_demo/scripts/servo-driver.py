@@ -23,7 +23,7 @@ class JointCmdSubscriber(Node):
     def listener_cb(self, msg):
         try:
             cmd = float(msg.data)
-            servo_angle = -degrees(cmd)
+            servo_angle = degrees(cmd)
             self.serial_conn.write(f'{servo_angle}\n'.encode())
         except:
             pass
