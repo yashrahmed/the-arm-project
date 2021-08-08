@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="single-joint-demo-robot">
+    <xacro:arg name="initial_positions_file" default="initial-joint-config.yaml" />
+
+    <!-- Import panda urdf file -->
+    <xacro:include filename="$(find single_joint_demo)/resources/single-joint-robot/single-joint-demo.urdf" />
+
+    <!-- Import panda ros2_control description -->
+    <xacro:include filename="$(find single_joint_demo)/resources/single-joint-robot/single-joint-ros2-control.xacro" />
+
+    <xacro:single_joint_ros2-control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+</robot>

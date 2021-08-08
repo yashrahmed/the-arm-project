@@ -1,0 +1,9 @@
+<library path="single_joint_demo">
+  <class name="single_joint_demo_hw/JointHardware"
+         type="single_joint_demo_hw::JointHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware to write single joint angle to topic.
+    </description>
+  </class>
+</library>
